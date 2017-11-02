@@ -11,19 +11,6 @@ class Node(object):
     def __repr__(self):
         return str(self.value)
 
-def print_tree(rootnode):
-    thislevel = [rootnode]
-    while thislevel:
-        nextlevel = list()
-        for n in thislevel:
-            print n.value,
-            if n.left:
-                nextlevel.append(n.left)
-            if n.right:
-                nextlevel.append(n.right)
-        print
-        thislevel = nextlevel
-
 def all_paths(node):
     if node.left is None and node.right is None:
         return [[node.value]]
