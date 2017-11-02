@@ -9,8 +9,12 @@ setup(
     version='0.1',
     description="Optimization Package to phase haplotypes",
     author="Thomas Dias-Alves",
+    setup_requires=['numpy'],
     install_requires=[
-        "numpy"
+        "numpy",
+        "pandas",
+        "scikit-learn",
+        "scipy"
     ],
     packages=find_packages(),
     data_files=[lib_path]

@@ -1,6 +1,6 @@
-# loter
+# Loter
 
-Loter is a package for haplotype phasing and local ancestry inference.
+Loter is a Python package for haplotype phasing and local ancestry inference.
 
 # Installation
 
@@ -28,6 +28,10 @@ python setup.py install
 ```
 
 # Run the method
+
+## Local Ancestry Inference
+
+For Local Ancestry, see the tutorial in the python-package directory: [https://github.com/bcm-uga/Loter/blob/master/python-package/[Loter]%20Local%20Ancestry%20Example.ipynb](Local Ancestry Example).
 
 ## Phasing
 
@@ -57,5 +61,3 @@ l_res = pipeline.pipelines["classic_pipeline"].run(np.copy(G), nbrun=10, nb_iter
 G_res = combine.combiner_G["G vote"](l_res)
 H_res = combine.combiner_H["H_mean"](l_res)
 ```
-
-For Local Ancestry, see the tutorial in the python-package directory.
