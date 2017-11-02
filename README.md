@@ -63,4 +63,5 @@ H_res = combine.combiner_H["H_mean"](l_res)
 ```
 
 Loter is free for academic use only.
+
 © 2017 All rights reserved - Inria, UGA, CNRS
