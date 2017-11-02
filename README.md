@@ -61,3 +61,6 @@ l_res = pipeline.pipelines["classic_pipeline"].run(np.copy(G), nbrun=10, nb_iter
 G_res = combine.combiner_G["G vote"](l_res)
 H_res = combine.combiner_H["H_mean"](l_res)
 ```
+
+Loter is free for academic use only.
+© 2017 All rights reserved - Inria, UGA, CNRS
