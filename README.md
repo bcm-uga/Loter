@@ -31,7 +31,7 @@ python setup.py install
 
 ## Local Ancestry Inference
 
-For Local Ancestry, see the tutorial in the python-package directory: [https://github.com/bcm-uga/Loter/blob/master/python-package/[Loter]%20Local%20Ancestry%20Example.ipynb](Local Ancestry Example).
+For Local Ancestry, see the tutorial in the python-package directory: [Local Ancestry Example](https://github.com/bcm-uga/Loter/blob/master/python-package/Local%20Ancestry%20Example.ipynb).
 
 ## Phasing
 
