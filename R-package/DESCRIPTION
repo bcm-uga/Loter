@@ -1,0 +1,8 @@
+Package: loter
+Type: Package
+Title: Local Clustering Model For Genotypes
+Version: 0.1.0
+Authors@R: person("Thomas", "Dias Alves", email = "thomas.dias-alves@univ-grenoble-alpes.fr", role = c("aut", "cre"))
+Description: We formulate the problem of haplotype phasing as an optimization problem. This package is able to phase genotypes matrix and impute them.
+License: MIT
+LazyData: TRUE
