@@ -2,36 +2,57 @@
 
 Loter is a Python package for haplotype phasing and local ancestry inference.
 
+Loter is free for academic use only.
+
+Copyright 2017 All rights reserved - Inria, UGA, CNRS
+
+Contact: loter.dev@inria.fr
+
 # Installation
 
-Inside the top directory `loter`, compile the C++ library.
-The package require openmp , python and g++.
+The package require OpenMP (only mandatory for parallel computing), python and g++.
 
+Get Loter sources:
 ```bash
-# inside the top directory run :
-make
-
-# or if you do not have OPENMP
-make no_omp=1
+git clone https://github.com/bcm-uga/Loter.git
 ```
 
-Then we can install the python package.
-
+Install the `loter` Python package:
 ```bash
-# inside the top directory run :
-cd python-package/
-python setup.py install --user
-
-# or
-cd python-package/
+cd Loter/python-package/
 python setup.py install
 ```
+
+To install `loter` locally and avoid messing with you system, you can do:
+```bash
+python setup.py install --user
+```
+or you can use python virtual environment or a specific Python distribution like Anaconda.
+
+If you do not have OpenMP on your system (especially for MacOS users), you can do:
+```bash
+python setup.py install --no_openmp
+# or
+python setup.py install --user --no_openmp
+```
+
 
 # Run the method
 
 ## Local Ancestry Inference
 
-For Local Ancestry, see the tutorial in the python-package directory: [Local Ancestry Example](https://github.com/bcm-uga/Loter/blob/master/python-package/Local%20Ancestry%20Example.ipynb).
+For Local Ancestry, see the tutorial in the python-package directory: see [Local Ancestry Example](./python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
+
+To test it:
+```bash
+cd Loter/python-package/
+jupyter notebook
+```
+
+**Reference:** Dias-Alves, T., Mairal, J., Blum, M.G.B., Nielsen, R., 2018. Loter: A Software Package to Infer Local Ancestry for a Wide Range of Species. Mol Biol Evol 35, 2318–2326. https://doi.org/10.1093/molbev/msy126
+
+**Simulations of admixed individuals:** informations about data simulation are available  [here](https://github.com/BioShock38/aede).
+
 
 ## Phasing
 
@@ -62,6 +83,4 @@ G_res = combine.combiner_G["G vote"](l_res)
 H_res = combine.combiner_H["H_mean"](l_res)
 ```
 
-Loter is free for academic use only.
-
-© 2017 All rights reserved - Inria, UGA, CNRS
+**Reference:** Dias Alves, T., 2017. Modélisation du déséquilibre de liaison en génomique des  populations par méthodes l’optimisation. PhD manuscript. Grenoble Alpes University. http://www.theses.fr/2017GREAS052

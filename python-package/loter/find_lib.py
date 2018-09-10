@@ -1,5 +1,6 @@
 import ctypes as C
 import os
+import sys
 import pkg_resources
 from glob import glob
 
@@ -19,7 +20,12 @@ def _get_lib():
                    os.path.join('_loter_wrap*.so')))
 
     if not libpath:
-        raise LoterLibraryNotFound("Library `_loter_wrap.so` not found")
+        for dir in sys.path:
+            libpath = glob(os.path.join(dir, 'loter', '_loter_wrap*.so'))
+            if libpath:
+                break
+        if not libpath:
+            raise LoterLibraryNotFound("Library `_loter_wrap.so` not found")
 
     selected_lib = libpath[0]
     lib = C.cdll.LoadLibrary(selected_lib)
