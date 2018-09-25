@@ -70,5 +70,6 @@ setup(
     ],
     ext_modules = [loter_wrap,],
     packages=find_packages(),
-    data_files=[]
+    data_files=[],
+    zip_safe=False
 )
