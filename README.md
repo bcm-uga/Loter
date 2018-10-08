@@ -49,7 +49,7 @@ cd Loter/python-package/
 jupyter notebook
 ```
 
-**Reference:** Dias-Alves, T., Mairal, J., Blum, M.G.B., Nielsen, R., 2018. Loter: A Software Package to Infer Local Ancestry for a Wide Range of Species. Mol Biol Evol 35, 2318–2326. https://doi.org/10.1093/molbev/msy126
+**Reference:** Dias-Alves, T., Mairal, J., Blum, M.G.B., 2018. Loter: A Software Package to Infer Local Ancestry for a Wide Range of Species. Mol Biol Evol 35, 2318–2326. https://doi.org/10.1093/molbev/msy126
 
 **Simulations of admixed individuals:** informations about data simulation are available  [here](https://github.com/BioShock38/aede).
 
