@@ -10,7 +10,7 @@ Contact: loter.dev@inria.fr
 
 # Installation
 
-The package require OpenMP (only mandatory for parallel computing), python and g++.
+The package require OpenMP (only mandatory for parallel computing), Python and g++.
 
 Get Loter sources:
 ```bash
@@ -27,7 +27,7 @@ To install `loter` locally and avoid messing with you system, you can do:
 ```bash
 python setup.py install --user
 ```
-or you can use python virtual environment or a specific Python distribution like Anaconda.
+or you can use a Python virtual environment or a specific Python distribution like Anaconda.
 
 If you do not have OpenMP on your system (especially for MacOS users), you can do:
 ```bash
@@ -41,7 +41,7 @@ python setup.py install --user --no_openmp
 
 ## Local Ancestry Inference
 
-For Local Ancestry, see the tutorial in the python-package directory: see [Local Ancestry Example](./python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
+For Local Ancestry, see the tutorial in the Python-package directory: see [Local Ancestry Example](./Python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
 
 To test it:
 ```bash
