@@ -41,7 +41,7 @@ python setup.py install --user --no_openmp
 
 ## Local Ancestry Inference
 
-For Local Ancestry, see the tutorial in the Python-package directory: see [Local Ancestry Example](./Python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
+For Local Ancestry, see the tutorial in the Python-package directory: see [Local Ancestry Example](./python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
 
 To test it:
 ```bash
