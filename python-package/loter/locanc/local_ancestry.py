@@ -166,9 +166,18 @@ def encode_haplo(H):
     H1, H2 = H[::2], H[1::2]
     return ((np.maximum(H1, H2) * (np.maximum(H1, H2) + 1)) / 2) + np.minimum(H1, H2)
 
-def loter_multiple_pops(l_H, h_adm, lambd, num_threads=10):
+def loter_multiple_pops(l_H, h_adm, lambd, num_threads=10, default=True):
+    odd = False
+    if h_adm.shape[0] % 2 != 0 & default:
+        odd = True
+        h_adm = np.vstack([h_adm, np.repeat(0, h_adm.shape[1])])
+
     res_loter, _= locanc_h_knn([h.astype(np.uint8) for h in l_H],
                                h_adm.astype(np.uint8), lambd, num_threads)
+
+    if odd & default:
+        res_loter = res_loter[:res_loter.shape[0]-1]
+
     return res_loter
 
 def boostrap_loter_multiple_pops(l_H, h_adm, lambd, counts, nbrun=20, num_threads=10):
@@ -184,7 +193,8 @@ def boostrap_loter_multiple_pops(l_H, h_adm, lambd, counts, nbrun=20, num_thread
                                    loter_multiple_pops(shuffled_H,
                                                        h_adm,
                                                        lambd,
-                                                       num_threads),
+                                                       num_threads,
+                                                       False),
                                    len(l_H)
             )
     else:
@@ -192,14 +202,22 @@ def boostrap_loter_multiple_pops(l_H, h_adm, lambd, counts, nbrun=20, num_thread
                                loter_multiple_pops(l_H,
                                                    h_adm,
                                                    lambd,
-                                                   num_threads),
+                                                   num_threads,
+                                                   False),
                                len(l_H)
         )
 
     return counts
 
 def loter_local_ancestry(l_H, h_adm, range_lambda=np.arange(1.5, 5.5, 0.5),
-                         rate_vote=0.5, nb_bagging=20, num_threads=10):
+                         rate_vote=0.5, nb_bagging=20, num_threads=10,
+                         default=True):
+
+    odd = False
+    if h_adm.shape[0] % 2 != 0 & default:
+        odd = True
+        h_adm = np.vstack([h_adm, np.repeat(0, h_adm.shape[1])])
+
     input_loter = (l_H, h_adm)
     n, m = h_adm.shape
     counts = np.zeros((len(l_H), n, m))
@@ -207,9 +225,16 @@ def loter_local_ancestry(l_H, h_adm, range_lambda=np.arange(1.5, 5.5, 0.5),
         res_boostrap = boostrap_loter_multiple_pops(*input_loter, lambd=l,
                                                     counts=counts, nbrun=nb_bagging,
                                                     num_threads=num_threads)
-    res_loter = mode(counts)
-    r = vote_and_impute(res_loter, rate_vote)
-    return r, res_loter
+    res_tmp = mode(counts)
+
+    if default:
+        if odd:
+            res_loter = (res_tmp[0][:res_tmp[0].shape[0]-1],
+                         res_tmp[1][:res_tmp[1].shape[1]-1])
+        return res_loter
+    else:
+        r = vote_and_impute(res_tmp, rate_vote)
+        return r, res_loter
 
 def diploid_sim(cluster_found, cluster_truth):
     (n,m) = cluster_found.shape
@@ -261,8 +286,13 @@ def vote_and_impute(s, percent_threshold=0.5):
 
 def loter_smooth(l_H, h_adm, range_lambda=np.arange(1.5, 5.5, 0.5),
                  threshold=0.90, rate_vote=0.5, nb_bagging=20, num_threads=10):
+
+    if h_adm.shape[0] % 2 != 0:
+        raise ValueError("`loter_smooth` is designed to analyze haplotypes from diploid species, `l_H.shape[0]` should be an even number. In other cases, you can use the function `loter_local_ancestry`.")
+
     res_impute, res_raw = loter_local_ancestry(l_H, h_adm, range_lambda,
-                                               rate_vote, nb_bagging, num_threads)
+                                               rate_vote, nb_bagging, num_threads,
+                                               False)
     result = np.copy(res_impute)
     result_hap = []
     for i in range(len(res_impute)):
