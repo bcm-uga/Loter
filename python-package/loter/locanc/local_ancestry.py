@@ -231,10 +231,12 @@ def loter_local_ancestry(l_H, h_adm, range_lambda=np.arange(1.5, 5.5, 0.5),
         if odd:
             res_loter = (res_tmp[0][:res_tmp[0].shape[0]-1],
                          res_tmp[1][:res_tmp[1].shape[1]-1])
+        else:
+            res_loter = res_tmp
         return res_loter
     else:
         r = vote_and_impute(res_tmp, rate_vote)
-        return r, res_loter
+        return r, res_tmp
 
 def diploid_sim(cluster_found, cluster_truth):
     (n,m) = cluster_found.shape
