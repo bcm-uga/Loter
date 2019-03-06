@@ -1,27 +1,37 @@
 # Loter
 
-Loter is a Python package for haplotype phasing and local ancestry inference.
+Loter is a Python (and soon R) package for local ancestry inference [1] and haplotype phasing [2].
 
 Loter is free for academic use only.
 
 Copyright 2017 All rights reserved - Inria, UGA, CNRS
 
-Contact: loter.dev@inria.fr
+If you encounter any problem or if you have questions regarding Loter, 
+please open an issue on [Github](https://github.com/bcm-uga/Loter.git), 
+or you can contact ut at <loter.dev@inria.fr>.
 
 # Installation
 
-The package require OpenMP (only mandatory for parallel computing), Python and g++.
+The package requires OpenMP (only mandatory for parallel computing), Python and a C++ compiler 
+(tested with g++). In addition, a version for R is under development.
 
-Get Loter sources:
+To get Loter sources:
 ```bash
 git clone https://github.com/bcm-uga/Loter.git
 ```
 
-Install the `loter` Python package:
+## Python package
+
+To install the `loter` Python package:
 ```bash
 cd Loter/python-package/
 python setup.py install
 ```
+
+The following Python packages will be installed during the process 
+as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to
+install them before installing `loter`, for instance with the command 
+`pip install numpy pandas scikit-learn scipy`.
 
 To install `loter` locally and avoid messing with you system, you can do:
 ```bash
@@ -36,12 +46,18 @@ python setup.py install --no_openmp
 python setup.py install --user --no_openmp
 ```
 
+## R package
 
-# Run the method
+A version of Loter will be soon available for R.
 
-## Local Ancestry Inference
 
-For Local Ancestry, see the tutorial in the Python-package directory: see [Local Ancestry Example](./python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
+# Use Loter Python package
+
+You can find details about how to run Loter for local ancestry inference (LAI) [1] and haplotype phasing [2]
+in Python [here](./python-package/README.md).
+
+In particular, regarding LAI, please check the tutorial in the `python-package` directory: 
+see [Local Ancestry Example](./python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
 
 To test it:
 ```bash
@@ -49,38 +65,33 @@ cd Loter/python-package/
 jupyter notebook
 ```
 
-**Reference:** Dias-Alves, T., Mairal, J., Blum, M.G.B., 2018. Loter: A Software Package to Infer Local Ancestry for a Wide Range of Species. Mol Biol Evol 35, 2318–2326. https://doi.org/10.1093/molbev/msy126
-
-**Simulations of admixed individuals:** informations about data simulation are available  [here](https://github.com/BioShock38/aede).
-
-
-## Phasing
-
-Two methods to run the package for phasing
-
+In addition, here is a small example of local ancestry inference with Loter:
 ```python
-# Directly run the C++ function
+import os
+import numpy as np
 
-import haplophase.wrapper_cpp as hap
+# admixed haplotypes
+H_adm = np.load(os.path.expanduser("FILE1")) # replace FILE1 by your data file name
+# ref 1 haplotypes
+H_ref1 = np.load(os.path.expanduser("FILE2")) # replace FILE2 by your data file name
+# ref 2 haplotypes
+H_ref2 = np.load(os.path.expanduser("FILE3")) # replace FILE3 by your data file name
 
-G = np.load(os.path.expanduser("FILE"))
-G_res = np.copy(G)
-H = hap.wrapper_all(G=G_res, k=k, nb_iter=20, nb_run=10, w=100, penalty=2.0)
+# Loter local ancestry inference module
+import loter.locanc.local_ancestry as lc
 
-# You get the imputed genotype matrix in G_res and H the haplotypes.
+## Loter with bagging and phase correction module
+res_loter = lc.loter_smooth(l_H=[H_ref1, H_ref2], h_adm=H_adm, num_threads=8) ## set the number of threads
+## Loter with bagging only
+res_loter = lc.loter_local_ancestry(l_H=[H_ref1, H_ref2], h_adm=H_adm, num_threads=8) ## set the number of threads
 ```
 
-```python
-# You can create your own pipeline or select one already existing
+**Note:** More details are given in the [notebook](./python-package/Local_Ancestry_Example.ipynb), 
+especially how to load data from VCF files if your data are not available as Numpy arrays.
 
-import haplophase.pipeline as pipeline
-G = np.load(os.path.expanduser("FILE"))
 
-l_res = pipeline.pipelines["classic_pipeline"].run(np.copy(G), nbrun=10, nb_iter=20, nb_run=10, w=100, penalty=2.0)
-# You get a list of results that you can combine.
+# References
 
-G_res = combine.combiner_G["G vote"](l_res)
-H_res = combine.combiner_H["H_mean"](l_res)
-```
+[1] Dias-Alves, T., Mairal, J., Blum, M.G.B., 2018. Loter: A Software Package to Infer Local Ancestry for a Wide Range of Species. Mol Biol Evol 35, 2318–2326. https://doi.org/10.1093/molbev/msy126
 
-**Reference:** Dias Alves, T., 2017. Modélisation du déséquilibre de liaison en génomique des  populations par méthodes l’optimisation. PhD manuscript. Grenoble Alpes University. http://www.theses.fr/2017GREAS052
+[2] Dias Alves, T., 2017. Modélisation du déséquilibre de liaison en génomique des  populations par méthodes l’optimisation. PhD manuscript. Grenoble Alpes University. http://www.theses.fr/2017GREAS052
