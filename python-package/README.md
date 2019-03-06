@@ -8,7 +8,7 @@ Copyright 2017 All rights reserved - Inria, UGA, CNRS
 
 If you encounter any problem or if you have questions regarding Loter, 
 please open an issue on [Github](https://github.com/bcm-uga/Loter.git), 
-or you can contact ut at <loter.dev@inria.fr>.
+or you can contact us at <loter.dev@inria.fr>.
 
 # Installation
 
