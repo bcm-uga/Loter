@@ -68,8 +68,11 @@ setup(
         "scikit-learn",
         "scipy"
     ],
-    ext_modules = [loter_wrap,],
+    ext_modules=[loter_wrap,],
     packages=find_packages(),
+    entry_points={
+        'console_scripts': ['loter_cli=loter.cli:main'],
+    },
     data_files=[],
     zip_safe=False
 )

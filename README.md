@@ -6,13 +6,13 @@ Loter is free for academic use only.
 
 Copyright 2017 All rights reserved - Inria, UGA, CNRS
 
-If you encounter any problem or if you have questions regarding Loter, 
-please open an issue on [Github](https://github.com/bcm-uga/Loter.git), 
+If you encounter any problem or if you have questions regarding Loter,
+please open an issue on [Github](https://github.com/bcm-uga/Loter.git),
 or you can contact us at <loter.dev@inria.fr>.
 
 # Installation
 
-The package requires OpenMP (only mandatory for parallel computing), Python and a C++ compiler 
+The package requires OpenMP (only mandatory for parallel computing), Python and a C++ compiler
 (tested with g++). In addition, a version for R is under development.
 
 To get Loter sources:
@@ -28,9 +28,9 @@ cd Loter/python-package/
 python setup.py install
 ```
 
-The following Python packages will be installed during the process 
+The following Python packages will be installed during the process
 as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to
-install them before installing `loter`, for instance with the command 
+install them before installing `loter`, for instance with the command
 `pip install numpy pandas scikit-learn scipy`.
 
 To install `loter` locally and avoid messing with you system, you can do:
@@ -53,10 +53,10 @@ A version of Loter will be soon available for R.
 
 # Use Loter Python package
 
-You can find details about how to run Loter for local ancestry inference (LAI) [1] and haplotype phasing [2]
-in Python [here](./python-package/README.md).
+You can find details about how to run Loter for local ancestry inference (LAI) [1]
+and haplotype phasing [2] in Python [here](./python-package/README.md).
 
-In particular, regarding LAI, please check the tutorial in the `python-package` directory: 
+In particular, regarding LAI, please check the tutorial in the `python-package` directory:
 see [Local Ancestry Example](./python-package/Local_Ancestry_Example.ipynb) available as a Jupyter notebook.
 
 To test it:
@@ -86,8 +86,32 @@ res_loter = lc.loter_smooth(l_H=[H_ref1, H_ref2], h_adm=H_adm, num_threads=8) ##
 res_loter = lc.loter_local_ancestry(l_H=[H_ref1, H_ref2], h_adm=H_adm, num_threads=8) ## set the number of threads
 ```
 
-**Note:** More details are given in the [notebook](./python-package/Local_Ancestry_Example.ipynb), 
+**Note:** More details are given in the [notebook](./python-package/Local_Ancestry_Example.ipynb),
 especially how to load data from VCF files if your data are not available as Numpy arrays.
+
+
+# Comand line tool
+
+With the Python package installation comes a command line interface `loter_cli`
+for **local ancestry inference** that allows you to directly call Loter
+from the command line without writing your own Python script.
+
+It requires that your haplotype input data are stored as saved Numpy arrays,
+in csv text files (experimental) or in VCF files. In any case, your input
+haplotype matrices should be organised as follows: with haplotypes (samples)
+in rows and SNPs in columns. Ancestries of admixed haplotypes inferred by Loter
+will be stored in the same way.
+
+```bash
+# help
+loter_cli -h
+# examples run in Loter project root directory
+cd Loter
+# Loter with bagging
+loter_cli data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -n 8 -v
+# Loter with bagging and phase correction
+loter_cli data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -n 8 -pc -v
+```
 
 
 # References
