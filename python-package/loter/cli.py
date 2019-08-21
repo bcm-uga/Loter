@@ -52,7 +52,7 @@ def load_data(file_name, format="npy", verbose=True):
     if format == "npy":
         data_array = np.load(os.path.expanduser(file_name))
     elif format == "txt":
-        data_array = np.genfromtxt(os.path.expanduser(file_name))
+        data_array = np.genfromtxt(os.path.expanduser(file_name), dtype=np.uint8)
     elif format == "vcf":
         try:
             data_array = vcf2npy(file_name)
@@ -61,7 +61,7 @@ def load_data(file_name, format="npy", verbose=True):
                   + "(available with `pip install scikit-allel`)")
     else:
         raise ValueError("Wrong data file format")
-    return data_array
+    return data_array.astype(np.uint8)
 
 
 def main():
@@ -74,7 +74,7 @@ def main():
         description = __doc__,
         epilog=textwrap.dedent('''\
             **Note:**
-                Haplotype inut matrices should be organised
+                Haplotype input matrices should be organised
                 as follows: with haplotypes (samples) in rows and SNPs
                 in columns. Ancestries of admixed haplotypes inferred by Loter
                 will be stored in the same way
