@@ -50,7 +50,7 @@ def load_data(file_name, format="npy", verbose=True):
         print("loading file {}".format(file_name))
     data_array = None
     if format == "npy":
-        data_array = np.load(os.path.expanduser(file_name))
+        data_array = np.load(os.path.expanduser(file_name), allow_pickle = True)
     elif format == "txt":
         data_array = np.genfromtxt(os.path.expanduser(file_name), dtype=np.uint8)
     elif format == "vcf":
