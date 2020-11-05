@@ -5,7 +5,7 @@ import loter.errorhandler as errorhandler
 import loter.datastruct.parameter as parameter
 from loter.find_lib import _LIB
 
-from sklearn.utils.linear_assignment_ import linear_assignment # Munkres Algorithm
+from scipy.optimize import linear_sum_assignment as linear_assignment  # Munkres Algorithm
 from collections import Counter
 
 @errorhandler.eh_fn
