@@ -39,19 +39,32 @@ H_mex = np.load(os.path.join(os.pardir, "data", "H_mex.npy"), allow_pickle=True)
 H_ceu.shape # CEU haplotypes: 2*44 hapolotypes of the 1st 50,000 SNPs of chromosome 1
 ```
 
+
+
+
     (88, 50000)
+
+
 
 
 ```python
 H_yri.shape # YRI haplotypes: 2*50 hapolotypes of the 1st 50,000 SNPs of chromosome 1
 ```
 
+
+
+
     (100, 50000)
+
+
 
 
 ```python
 H_mex.shape # MEX haplotypes: 2*23 hapolotypes of the 1st 50,000 SNPs of chromosome 1
 ```
+
+
+
 
     (46, 50000)
 
@@ -149,7 +162,12 @@ plt.imshow(res_loter, interpolation='nearest', aspect='auto')
 plt.colorbar()
 ```
 
+
+
+
     <matplotlib.colorbar.Colorbar at 0x7f0cc8f4fac8>
+
+
 
 
 ![png](Local_Ancestry_Example_files/Local_Ancestry_Example_27_1.png)
@@ -189,16 +207,18 @@ In addition, the standard approach for local ancestry inference in Loter integra
 The function `loter.locanc.local_ancestry.loter_smooth` implements the method with both bagging and phase correction. Besides `l_H` and `h_adm` (c.f. [previously](#run_loter)), it takes several additional hyper-parameters:
 * `range_lambda`: list or 1-d array of candidate values (>0) for $\lambda$
 * `threshold`: smoothing parameter in [0,1] for the phase correction module (=1 corresponds to no smoothing)
-* `rate_vote`: bagging vote parameter in [0,1]
-* `nb_bagging`: number of resampling in the bagging (positive interger)
+* `rate_vote`: minimal bagging vote parameter in [0,1] (SNP with a majority vote lower than this threshold are considered indecisive and reassigned based on the reference population for nearest SNP with decisive vote)
+* `nb_bagging`: number of resampling in the bagging (positive integer)
 * `num_threads`: number of threads for parallel computations (requires OpenMP, c.f. [README.md](../README.md))
 
 
 ```python
 import loter.locanc.local_ancestry as lc
 
-res_loter = lc.loter_smooth(l_H=[H_ceu, H_yri], h_adm=H_mex, range_lambda=np.arange(1.5, 5.5, 0.5),
-                            threshold=0.90, rate_vote=0.5, nb_bagging=20, num_threads=8)
+res_loter = lc.loter_smooth(
+    l_H=[H_ceu, H_yri], h_adm=H_mex, range_lambda=np.arange(1.5, 5.5, 0.5),
+    threshold=0.90, rate_vote=0.5, nb_bagging=20, num_threads=8
+)
 ```
 
 ## b) Loter without phase correction
@@ -207,7 +227,7 @@ It is possible to run the local ancestry inference approach in Loter without the
 
 Besides `l_H` and `h_adm` (c.f. [previously](#run_loter)), it takes several additional hyper-parameters:
 * `range_lambda`: list or 1-d array of candidate values (>0) for $\lambda$
-* `rate_vote`: bagging vote parameter in [0,1]
+* `rate_vote`: irrelevant in this mode
 * `nb_bagging`: number of resampling in the bagging (positive interger)
 * `num_threads`: number of threads for parallel computations (requires OpenMP, c.f. [README.md](../README.md))
 
@@ -215,8 +235,10 @@ Besides `l_H` and `h_adm` (c.f. [previously](#run_loter)), it takes several addi
 ```python
 import loter.locanc.local_ancestry as lc
 
-res_loter = lc.loter_local_ancestry(l_H=[H_ceu, H_yri], h_adm=H_mex, range_lambda=np.arange(1.5, 5.5, 0.5),
-                                    rate_vote=0.5, nb_bagging=20, num_threads=8)
+res_loter = lc.loter_local_ancestry(
+    l_H=[H_ceu, H_yri], h_adm=H_mex, range_lambda=np.arange(1.5, 5.5, 0.5),
+    nb_bagging=20, num_threads=8
+)
 ```
 
 The result containing haplotypic ancestry can be found in `res_loter`.
@@ -240,8 +262,10 @@ If you want to get additional information about genotypic ancestry, only in the 
 
 
 ```python
-res_impute, res_no_impute = lc.loter_local_ancestry(l_H=[H_ceu, H_yri], h_adm=H_mex, range_lambda=np.arange(1.5, 5.5, 0.5),\n",
-                                                    rate_vote=0.5, nb_bagging=20, num_threads=8, default=False)
+res_impute, res_no_impute = lc.loter_local_ancestry(
+    l_H=[H_ceu, H_yri], h_adm=H_mex, range_lambda=np.arange(1.5, 5.5, 0.5),
+    rate_vote=0.5, nb_bagging=20, num_threads=8, default=False
+)
 ```
 
 In this case, the result containing haplotypic ancestry can be found in the second variable `res_no_impute`. In particular, `res_no_impute[0]` contains the ancestry and `res_no_impute[1]` contains the number of time that ancestry was picked in the bagging procedure.
@@ -267,6 +291,8 @@ For example, let's consider 3 populations:
 
 So genotypic ancestry compresses the pair information into one single number.
 It is useful for the computation of the genotypic ancestry error rate.
+
+In this mode, the `rate_vote` input parameter is the minimal bagging vote parameter in [0,1]. The SNP with a majority vote lower than this threshold are considered indecisive and reassigned based on the reference population for nearest SNP with decisive vote.
 
 
 # IV) Dealing with more than 2 ancestral populations <a class="anchor" id='3pop'></a>
