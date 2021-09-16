@@ -77,10 +77,13 @@ def main():
                 Haplotype input matrices should be organised
                 as follows: with haplotypes (samples) in rows and SNPs
                 in columns. Ancestries of admixed haplotypes inferred by Loter
-                will be stored in the same way
+                will be stored in the same way.
+            
+            **Important:** When using text format (csv) for input data, 
+            missing values should be encoded as 255 or NA.
 
             Example (run from Loter project root directory):
-            loter_cli data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -n 8 -v'''))
+            loter_cli -r data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -n 8 -v'''))
     requiredNamed = parser.add_argument_group('required named arguments')
     requiredNamed.add_argument(
                         "-r", "--ref", nargs='+',

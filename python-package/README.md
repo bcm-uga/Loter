@@ -114,6 +114,8 @@ loter_cli -r data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -
 loter_cli -r data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -n 8 -pc -v
 ```
 
+**Important:** When using text format (csv) for input data, missing values should be encoded as 255 or NA.
+
 
 ## Phasing
 
