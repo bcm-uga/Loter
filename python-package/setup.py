@@ -57,7 +57,7 @@ loter_wrap = Extension(
 
 setup(
     name='loter',
-    version='0.1',
+    version='1.0',
     description="Optimization Package to phase haplotypes",
     author="Thomas Dias-Alves",
     url = 'https://github.com/bcm-uga/Loter',
