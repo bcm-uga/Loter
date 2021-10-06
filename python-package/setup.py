@@ -61,6 +61,8 @@ setup(
     description="Optimization Package to phase haplotypes",
     author="Thomas Dias-Alves",
     url = 'https://github.com/bcm-uga/Loter',
+    license = "MIT",
+    license_files = ('LICENSE.txt',),
     setup_requires=['numpy'],
     install_requires=[
         "numpy",

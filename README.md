@@ -2,9 +2,7 @@
 
 Loter is a Python (and soon R) package for local ancestry inference [1] and haplotype phasing [2].
 
-Loter is free for academic use only.
-
-Copyright 2017 All rights reserved - Inria, UGA, CNRS
+Loter is available under the MIT license. Copyright 2017 - Inria, UGA, CNRS.
 
 If you encounter any problem or if you have questions regarding Loter,
 please open an issue on [Github](https://github.com/bcm-uga/Loter.git),
