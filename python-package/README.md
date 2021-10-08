@@ -14,6 +14,8 @@ or you can contact us at <loter.dev@inria.fr>.
 
 The package requires BLAS/LAPACK libraries, OpenMP (optional but recommended for parallel computing), a C++ compiler (tested with g++) and Python 3 (for the Python package). In addition, a version for R is under development.
 
+:information_source: When using Python precompiled package for Linux 64bits, only Python 3 is required (other required libraries are included in the precompiled package).
+
 ---
 
 ## Installation
