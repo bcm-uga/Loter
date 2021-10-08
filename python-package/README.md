@@ -8,9 +8,13 @@ If you encounter any problem or if you have questions regarding Loter,
 please open an issue on [Github](https://github.com/bcm-uga/Loter.git),
 or you can contact us at <loter.dev@inria.fr>.
 
+---
+
 ## Requirements
 
 The package requires BLAS/LAPACK libraries, OpenMP (optional but recommended for parallel computing), a C++ compiler (tested with g++) and Python 3 (for the Python package). In addition, a version for R is under development.
+
+---
 
 ## Installation
 
@@ -25,7 +29,7 @@ pip install loter
 
 > :warning: Precompiled package is only available for Linux 64bits system. On other systems (Linux 32bits, MacOS, Windows), the package will need to be compiled at installation. You must prepare your system by installing all requirements (c.f. [previous section](#requirements)) including OpenMP (mandatory for installation with `pip`).
 
-#### From precompiled package (only on Linux 64bits)
+#### From precompiled package (only for Linux 64bits)
 
 Go to the release page on [Github](https://github.com/bcm-uga/Loter/releases) and download the `loter-*.whl` file corresponding to your Python version, then install Loter by running:
 ```bash
@@ -66,13 +70,23 @@ python setup.py install --no_openmp
 python setup.py install --user --no_openmp
 ```
 
-## Run the method
+---
+
+### R package
+
+A version of Loter will be soon available for R.
+
+> :warning: The development of the version for R is currently paused.
+
+---
+
+## Using Loter Python package
+
+Here are some details about how to run Loter for local ancestry inference (LAI) [1] and haplotype phasing [2].
 
 ### Local Ancestry Inference (LAI)
 
-#### Python
-
-Local ancestry inference with loter in Python is explained in the following Jupyter notebook tutorial: [Local Ancestry Example](./Local_Ancestry_Example.ipynb). 
+Local ancestry inference with Loter (see [1] for details) in Python is explained in the following Jupyter notebook tutorial: [Local Ancestry Example](./Local_Ancestry_Example.ipynb) and corresponding [markdown transcription](./Local_Ancestry_Example.md). 
 
 To access it, you can do:
 ```bash
@@ -110,8 +124,6 @@ res_loter = lc.loter_local_ancestry(l_H=[H_ref1, H_ref2], h_adm=H_adm, num_threa
 **Note:** More details are given in the [notebook](./Local_Ancestry_Example.ipynb),
 especially how to load data from VCF files if your data are not available as Numpy arrays.
 
-**Reference:** Dias-Alves, T., Mairal, J., Blum, M.G.B., 2018. Loter: A Software Package to Infer Local Ancestry for a Wide Range of Species. Mol Biol Evol 35, 2318–2326. https://doi.org/10.1093/molbev/msy126
-
 **Simulations of admixed individuals:** informations about data simulation are available  [here](https://github.com/BioShock38/aede).
 
 
@@ -140,10 +152,11 @@ loter_cli -r data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -
 
 **Important:** When using text format (csv) for input data, missing values should be encoded as 255 or NA.
 
+---
 
 ### Phasing
 
-Two methods to run the package for phasing
+Two methods to run the package to phase genotypes into haplotypes (see [2] for details):
 
 ```python
 import os
@@ -173,4 +186,10 @@ G_res = combine.combiner_G["G vote"](l_res)
 H_res = combine.combiner_H["H_mean"](l_res)
 ```
 
-**Reference:** Dias Alves, T., 2017. Modélisation du déséquilibre de liaison en génomique des  populations par méthodes l’optimisation. PhD manuscript. Grenoble Alpes University. http://www.theses.fr/2017GREAS052
+---
+
+## References
+
+[1] Dias-Alves, T., Mairal, J., Blum, M.G.B., 2018. Loter: A Software Package to Infer Local Ancestry for a Wide Range of Species. Mol Biol Evol 35, 2318–2326. https://doi.org/10.1093/molbev/msy126
+
+[2] Dias Alves, T., 2017. Modélisation du déséquilibre de liaison en génomique des  populations par méthodes l’optimisation. PhD manuscript. Grenoble Alpes University. http://www.theses.fr/2017GREAS052
