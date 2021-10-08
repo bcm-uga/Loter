@@ -27,7 +27,7 @@ Run:
 pip install loter
 ```
 
-> :warning: Precompiled package is only available for Linux 64bits system. On other systems (Linux 32bits, MacOS, Windows), the package will need to be compiled at installation. You must prepare your system by installing all requirements (c.f. [previous section](#requirements)) including OpenMP (mandatory for installation with `pip`).
+> :warning: Precompiled package is only available for Linux 64bits system. On other systems (Linux 32bits, MacOS, Windows), the package will need to be compiled at installation. You must prepare your system by installing all requirements (c.f. [previous section](#requirements)) including OpenMP (mandatory for installation with `pip`, see [below](#from-sources) if you do not have OpenMP).
 
 #### From precompiled package (only for Linux 64bits)
 
