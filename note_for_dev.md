@@ -27,5 +27,6 @@ python setup.py build sdist
 Install and run `twine`:
 ```bash
 pip install twine
+cp wheelhouse/* dist/
 twine upload dist/*
 ```
