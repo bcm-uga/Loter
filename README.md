@@ -8,34 +8,36 @@ If you encounter any problem or if you have questions regarding Loter,
 please open an issue on [Github](https://github.com/bcm-uga/Loter.git),
 or you can contact us at <loter.dev@inria.fr>.
 
-# Installation
+## Requirements
 
-The package requires OpenMP (only mandatory for parallel computing), Python and a C++ compiler
-(tested with g++). In addition, a version for R is under development.
+The package requires BLAS/LAPACK libraries, OpenMP (optional but recommended for parallel computing), a C++ compiler (tested with g++) and Python 3 (for the Python package). In addition, a version for R is under development.
+
+## Installation
 
 To get Loter sources:
 ```bash
 git clone https://github.com/bcm-uga/Loter.git
 ```
 
-## Python package
+### Python package
 
 To install the `loter` Python package:
 ```bash
+# go to package source dir
 cd Loter/python-package/
+# install
+pip install -e .
+# or
 python setup.py install
 ```
 
-The following Python packages will be installed during the process
-as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to
-install them before installing `loter`, for instance with the command
-`pip install numpy pandas scikit-learn scipy`.
+The following Python packages will be installed during the process as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to install them before installing `loter`, for instance with the command `pip install numpy pandas scikit-learn scipy`.
 
-To install `loter` locally and avoid messing with you system, you can do:
+To install `loter` locally and avoid messing with your system, you can do:
 ```bash
 python setup.py install --user
 ```
-or you can use a Python virtual environment or a specific Python distribution like Anaconda.
+or you can use a Python virtual environment (recommended) or a specific Python distribution like Anaconda.
 
 If you do not have OpenMP on your system (especially for MacOS users), you can do:
 ```bash
@@ -44,12 +46,14 @@ python setup.py install --no_openmp
 python setup.py install --user --no_openmp
 ```
 
-## R package
+### R package
 
 A version of Loter will be soon available for R.
 
+> :warning: The development of the version for R is currently paused.
 
-# Use Loter Python package
+
+## Use Loter Python package
 
 You can find details about how to run Loter for local ancestry inference (LAI) [1]
 and haplotype phasing [2] in Python [here](./python-package/README.md).
@@ -59,9 +63,15 @@ see [Local Ancestry Example](./python-package/Local_Ancestry_Example.ipynb) avai
 
 To test it:
 ```bash
+# install jupyter (if not available)
+pip install jupyter
+# go to package source dir
 cd Loter/python-package/
+# run jupyter
 jupyter notebook
 ```
+
+> **Note:** The tutorial requires the following additional Python packages: `matplotlib` and `scikit-allel` (you can run `pip install matplotlib scikit-allel` to get them).
 
 In addition, here is a small example of local ancestry inference with Loter:
 ```python

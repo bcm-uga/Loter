@@ -10,7 +10,7 @@ or you can contact us at <loter.dev@inria.fr>.
 
 # Installation
 
-The package requires OpenMP (only mandatory for parallel computing), Python and a C++ compiler (tested with g++).
+The package requires BLAS/LAPACK libraries, OpenMP (optional but recommended for parallel computing), a C++ compiler (tested with g++) and Python 3.
 
 To install Loter, please follow these instructions:
 
@@ -21,20 +21,21 @@ git clone https://github.com/bcm-uga/Loter.git
 
 2. Install the `loter` Python package:
 ```bash
+# go to package source dir
 cd Loter/python-package/
+# install
+pip install -e .
+# or
 python setup.py install
 ```
 
-**Note:** The following Python packages will be installed during the process
-as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to
-install them before installing `loter`, for instance with the command
-`pip install numpy pandas scikit-learn scipy`.
+> **Note:** The following Python packages will be installed during the process as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to install them before installing `loter`, for instance with the command `pip install numpy pandas scikit-learn scipy`.
 
-To install `loter` locally and avoid messing with you system, you can do:
+To install `loter` locally and avoid messing with your system, you can do:
 ```bash
 python setup.py install --user
 ```
-or you can use a Python virtual environment or a specific Python distribution like Anaconda.
+or you can use a Python virtual environment (recommended) or a specific Python distribution like Anaconda.
 
 If you do not have OpenMP on your system (especially for MacOS users), you can do:
 ```bash
@@ -50,15 +51,19 @@ python setup.py install --user --no_openmp
 
 ### Python
 
-Local ancestry inference with loter in Python is explained in the following Jupyter notebook tutorial:
-[Local Ancestry Example](./Local_Ancestry_Example.ipynb). To access it, you can do:
+Local ancestry inference with loter in Python is explained in the following Jupyter notebook tutorial: [Local Ancestry Example](./Local_Ancestry_Example.ipynb). 
+
+To access it, you can do:
 ```bash
+# install jupyter (if not available)
+pip install jupyter
+# go to package source dir
 cd Loter/python-package/
+# run jupyter
 jupyter notebook
 ```
 
-**Note:** The tutorial requires the following additional Python packages: `matplotlib` and `scikit-allel`
-(you can run `pip install matplotlib scikit-allel` to get them).
+> **Note:** The tutorial requires the following additional Python packages: `matplotlib` and `scikit-allel` (you can run `pip install matplotlib scikit-allel` to get them).
 
 In addition, here is a small example of local ancestry inference with Loter:
 ```python
