@@ -14,12 +14,32 @@ The package requires BLAS/LAPACK libraries, OpenMP (optional but recommended for
 
 ## Installation
 
+### Python package
+
+#### From PyPI
+
+Run:
+```bash
+pip install loter
+```
+
+> :warning: Precompiled package is only available for Linux 64bits system. On other systems (Linux 32bits, MacOS, Windows), the package will need to be compiled at installation. You must prepare your system by installing all requirements (c.f. [previous section](#requirements)) including OpenMP (mandatory for installation with `pip`).
+
+#### From precompiled package (only on Linux 64bits)
+
+Go to the release page on [Github](https://github.com/bcm-uga/Loter/releases) and download the `loter-*.whl` file corresponding to your Python version, then install Loter by running:
+```bash
+pip install loter-*.whl
+```
+
+> **Note:** replace `loter-*.whl` by the full name of the file you downloaded.
+
+#### From sources
+
 To get Loter sources:
 ```bash
 git clone https://github.com/bcm-uga/Loter.git
 ```
-
-### Python package
 
 To install the `loter` Python package:
 ```bash

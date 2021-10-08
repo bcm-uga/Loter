@@ -8,18 +8,40 @@ If you encounter any problem or if you have questions regarding Loter,
 please open an issue on [Github](https://github.com/bcm-uga/Loter.git),
 or you can contact us at <loter.dev@inria.fr>.
 
-# Installation
+## Requirements
 
-The package requires BLAS/LAPACK libraries, OpenMP (optional but recommended for parallel computing), a C++ compiler (tested with g++) and Python 3.
+The package requires BLAS/LAPACK libraries, OpenMP (optional but recommended for parallel computing), a C++ compiler (tested with g++) and Python 3 (for the Python package). In addition, a version for R is under development.
 
-To install Loter, please follow these instructions:
+## Installation
 
-1. Get Loter sources:
+### Python package
+
+#### From PyPI
+
+Run:
+```bash
+pip install loter
+```
+
+> :warning: Precompiled package is only available for Linux 64bits system. On other systems (Linux 32bits, MacOS, Windows), the package will need to be compiled at installation. You must prepare your system by installing all requirements (c.f. [previous section](#requirements)) including OpenMP (mandatory for installation with `pip`).
+
+#### From precompiled package (only on Linux 64bits)
+
+Go to the release page on [Github](https://github.com/bcm-uga/Loter/releases) and download the `loter-*.whl` file corresponding to your Python version, then install Loter by running:
+```bash
+pip install loter-*.whl
+```
+
+> **Note:** replace `loter-*.whl` by the full name of the file you downloaded.
+
+#### From sources
+
+To get Loter sources:
 ```bash
 git clone https://github.com/bcm-uga/Loter.git
 ```
 
-2. Install the `loter` Python package:
+To install the `loter` Python package:
 ```bash
 # go to package source dir
 cd Loter/python-package/
@@ -29,7 +51,7 @@ pip install -e .
 python setup.py install
 ```
 
-> **Note:** The following Python packages will be installed during the process as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to install them before installing `loter`, for instance with the command `pip install numpy pandas scikit-learn scipy`.
+The following Python packages will be installed during the process as dependencies: `numpy`, `pandas`, `scikit-learn`, `scipy`. If not, you may have to install them before installing `loter`, for instance with the command `pip install numpy pandas scikit-learn scipy`.
 
 To install `loter` locally and avoid messing with your system, you can do:
 ```bash
@@ -44,12 +66,11 @@ python setup.py install --no_openmp
 python setup.py install --user --no_openmp
 ```
 
+## Run the method
 
-# Run the method
+### Local Ancestry Inference (LAI)
 
-## Local Ancestry Inference (LAI)
-
-### Python
+#### Python
 
 Local ancestry inference with loter in Python is explained in the following Jupyter notebook tutorial: [Local Ancestry Example](./Local_Ancestry_Example.ipynb). 
 
@@ -94,7 +115,7 @@ especially how to load data from VCF files if your data are not available as Num
 **Simulations of admixed individuals:** informations about data simulation are available  [here](https://github.com/BioShock38/aede).
 
 
-### Comand line tool
+#### Comand line tool
 
 With the Python package installation comes a command line interface `loter_cli`
 for **local ancestry inference** that allows you to directly call Loter
@@ -120,7 +141,7 @@ loter_cli -r data/H_ceu.npy data/H_yri.npy -a data/H_mex.npy -f npy -o tmp.npy -
 **Important:** When using text format (csv) for input data, missing values should be encoded as 255 or NA.
 
 
-## Phasing
+### Phasing
 
 Two methods to run the package for phasing
 
