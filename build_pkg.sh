@@ -1,3 +1,4 @@
+#!/bin/bash
 # build wheel and source package
 
 ## Current working directory (should be root project directory)
@@ -10,14 +11,14 @@ function cleanup() {
 trap cleanup EXIT
 
 ## create (if necessary) and activate dedicated python environment
-PYENV=".pydevenv"
+PYENV="$WD/.pydevenv"
 if [[ ! -d ${PYENV} ]]; then
     python -m venv $PYENV
-else
-
+fi
 source ${PYENV}/bin/activate
-pip install -U setuptools cibuildwheel
 
+## install development requirements
+pip install -U setuptools cibuildwheel
 
 ## go to python package directory
 cd python-package
