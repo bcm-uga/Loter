@@ -7,7 +7,7 @@ def unpack_data_from_input(l_input):
     return [data for data, param in l_input]
 
 def compress_H(H):
-    H1, H2 = np.copy(H[::2]).astype(np.int), np.copy(H[1::2]).astype(np.int)
+    H1, H2 = np.copy(H[::2]).astype(np.int_), np.copy(H[1::2]).astype(np.int_)
     H1[H1 == 1] = 4
     H2[H2 == 1] = 5
     return H1 + H2

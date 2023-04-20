@@ -9,7 +9,7 @@ def init_data(data, inita, inith):
     data["H"] = inith(data["H"], data["G"])
     return data
 
-def init_a_rand(A, G, randomstate=None,dtype=np.int):
+def init_a_rand(A, G, randomstate=None,dtype=np.int_):
     """Initialize the clusters randomly.
 
     Initialize an already allocated matrix A (ancestry,cluster,...)
@@ -28,14 +28,14 @@ def init_a_rand(A, G, randomstate=None,dtype=np.int):
         randomstate = np.random.RandomState()
 
     (k,m) = A.shape
-    if dtype is np.int:
+    if dtype is np.int_:
         A = randomstate.randint(0,2,size=(k,m))
     else:
-        A = randomstate.random_sample(size=(k,m), dtype=np.float)
+        A = randomstate.random_sample(size=(k,m), dtype=np.float_)
 
     return A
 
-def init_a_selection_g(A, G, randomstate=None, dtype=np.int):
+def init_a_selection_g(A, G, randomstate=None, dtype=np.int_):
 
     (k,m) = A.shape
     (n,_) = G.shape
@@ -49,7 +49,7 @@ def init_a_selection_g(A, G, randomstate=None, dtype=np.int):
         elif snp == 2:
             return 1
         else:
-            if dtype is np.int:
+            if dtype is np.int_:
                 return randomstate.randint(0,2)
             else:
                 return randomstate.uniform()
@@ -61,7 +61,7 @@ def init_a_selection_g(A, G, randomstate=None, dtype=np.int):
 
     return A
 
-def init_a_tree(A, G, randomstate=None, dtype=np.int):
+def init_a_tree(A, G, randomstate=None, dtype=np.int_):
     k, m = A.shape
     n, _ = G.shape
 
@@ -193,7 +193,7 @@ def create_data(G, param):
     data["G"] = G
     data["H"] = np.ascontiguousarray(np.zeros((2*n,m), dtype=np.uint8))
     data["S"] = np.ascontiguousarray(np.zeros((2*n,m), dtype=np.uint8))
-    data["A"] = np.ascontiguousarray(np.zeros((k,m), dtype=np.float))
+    data["A"] = np.ascontiguousarray(np.zeros((k,m), dtype=np.float_))
 
     return data
 
