@@ -54,12 +54,19 @@ loter_wrap = Extension(
     depends = dep,
 )
 
+# long description from the README file
+with open(os.path.join(curr_path, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
 
+
+# package setup
 setup(
     name='loter',
-    version='1.0',
+    version='1.0.1',
     description="Optimization Package to phase haplotypes and infer local ancestry",
     author="Thomas Dias-Alves",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     url = 'https://github.com/bcm-uga/Loter',
     license = "MIT",
     license_files = ('LICENSE.txt',),
